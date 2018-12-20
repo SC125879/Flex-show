@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Flex学习</title>
+  <link rel='stylesheet' href='./css/bootstrap.css'>
+  <style>
+
+    .contents{
+      position:relative;
+      height:500px;
+      margin:0;
+      padding:0;
+      background-color:ghostwhite;
+    }
+    
+    .container-title{
+      font-size:25px;
+      margin-top:10px;
+      margin-left:16px;
+      font-weight:bold;
+    }
+
+    .flex-container{
+      display:flex;
+      height:480px;
+      overflow:hidden;
+      border:3px solid slateblue;
+      border-radius:12px;
+      padding:10px;      
+    }
+    .flex-container .flex-item{
+
+      width:100px;
+      height:100px;
+      border:0.5px solid skyblue;
+      border-radius:3px;
+      font-size:20px;
+      text-align:center;
+      line-height:100px; 
+      background-color:steelblue;
+    }
+    .flex-item:hover{
+      border:3px solid slategrey !important;
+    }
+    .flex-item:active{
+      border:4px solid slategrey;
+    }
+
+    /* 操作区 */
+    .flex-parent{
+      font-size:14px;
+    }
+    .setAttr{
+      background-color:rgba(56,56,56,0.1);
+      margin:1px 0;
+      padding:3px 10px;
+      border-radius:3px;
+    }
+    .title{
+      font-size:16px;
+      font-weight:bold;
+    }
+    .option input{
+      margin-right:5px;
+    }
+    .item-edit{
+      margin-top:20px;
+    }
+
+
+    /* 元素设置菜单 */
+    .item-menu{
+      z-index:999;
+      position:absolute;
+      overflow:hidden;
+      left:0px;
+      top:0px;
+      width:0;
+      height:0;
+      /* border:0.5px solid black; */
+      border-radius:10px;
+      box-shadow:0.5px 0.5px 1px black;
+      background-color:mintcream;
+      transition:width 0.2s ease,height 0.2s ease,left 0.3s ease;
+    }
+    .item-menu .menu{
+      list-style:none;
+      width:150px;
+      height:90px;
+      padding:2px;
+      margin:0;
+    }
+    .menu li{
+      display:block;
+      width:140px;
+      height:30px;
+      /* border:1px solid black; */
+      padding:4px 2px;
+      text-align:left;
+    }
+    .item-menu .menu input{
+      width:50px;
+      height:20px;
+    }
+    .item-menu .menu select{
+      width:70px;
+    }
+    .item-menu .menu-btn{
+      margin-left:28px;
+      margin-bottom:4px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class='container'>
+    <div class='panel col-md-12 panel-primary'>
+      <div class='panel-title container-title'>Flex属性演示器</div>
+      <div class='panel-body  col-md-12'>
+        <div class='col-md-8 panel panel-info'>
+          <!-- 演示区 -->
+          <div class='panel-title'> 演示区</div>
+          <div class='panel-body contents'>
+            <div class='flex-container'>
+              <div id='item1' class='flex-item'>1</div>
+              <div id='item2' class='flex-item'>2</div>
+              <div id='item3' class='flex-item'>3</div>
+            </div>
+
+            <!-- 子元素设置 -->
+            <div class='item-menu'>
+              <ul class='menu'>
+                <li class='list-item'>order: <input autocomplete='off' id='order' type="text"></li>
+                <li class='list-item'>flex: <input autocomplete='off' id='flex' type="text"></li>
+                <li class='list-item'>
+                  align-self:
+                  <select id='align-self'>
+                    <option value="auto" selected>auto</option>
+                    <option value="stretch">stretch</option>
+                    <option value="center">center</option>
+                    <option value="flex-start">flex-start</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="baseline">baseline</option>
+                    <option value="initial">initial</option>
+                    <option value="inherit">inherit</option>
+                  </select>
+                </li>
+              </ul>
+              <div class='menu-btn'>
+                <input autocomplete='off' type="button" class='btn btn-sm btn-default' id='editBtn' value='修改'>
+                <input autocomplete='off' type="button" class='btn btn-sm btn-default' id='cancelBtn' value='取消'>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class='col-md-4 panel panel-info '>
+          <!-- 操作区 -->
+          <div class='panel-title'> 操作区</div>
+
+          <div class='panel-body contents'>
+            <div class='flex-parent'>
+              <!-- flex-direction -->
+              <div class='setAttr' id='attr1'>
+                <div class='title'>flex-direction</div>
+                <div class='option'>
+                  <!--  autocomplete='off' 解决firefox 自动记录表单 -->
+                  row<input autocomplete='off' type='radio' name='flex-dir' value='row' checked>
+                  column<input autocomplete='off' type='radio' name='flex-dir' value='column'>
+                  <br />
+                  row-reverse<input autocomplete='off' type='radio' name='flex-dir' value='row-reverse'>
+                  column-reverse<input autocomplete='off' type='radio' name='flex-dir' value='column-reverse'>
+                </div>
+              </div>
+              <!-- justify-content -->
+              <div class='setAttr' id='attr2'>
+                <div class='title'>justify-content</div>
+                <div class='option'>
+                  flex-start<input autocomplete='off' type='radio' name='justify-cont' value='flex-start' checked>
+                  flex-end<input autocomplete='off' type='radio' name='justify-cont' value='flex-end'>
+                  center<input autocomplete='off' type='radio' name='justify-cont' value='center'>
+                  <br /> space-between<input autocomplete='off' type='radio' name='justify-cont' value='space-between'>
+                  space-around<input autocomplete='off' type='radio' name='justify-cont' value='space-around'>
+                </div>
+              </div>
+
+              <!-- align-items -->
+              <div class='setAttr' id='attr3'>
+                <div class='title'>align-items</div>
+                <div class='option'>
+                  stretch<input autocomplete='off' type='radio' name='align-items' value='stretch' checked>
+                  flex-start<input autocomplete='off' type='radio' name='align-items' value='flex-start'>
+                  flex-end<input autocomplete='off' type='radio' name='align-items' value='flex-end'>
+                  baseline<input autocomplete='off' type='radio' name='align-items' value='baseline'>
+                  center<input autocomplete='off' type='radio' name='align-items' value='center'>
+
+                </div>
+              </div>
+              <!-- flex-wrap -->
+              <div class='setAttr' id='attr4'>
+                <div class='title'>flex-wrap</div>
+                <div class='option'>
+                  nowrap<input autocomplete='off' type='radio' name='flex-wrap' value='nowrap' checked>
+                  wrap<input autocomplete='off' type='radio' name='flex-wrap' value='wrap'>
+                  wrap-reverse<input autocomplete='off' type='radio' name='flex-wrap' value='wrap-reverse'>
+                </div>
+              </div>
+              <!-- align-content -->
+              <div class='setAttr' id='attr5'>
+                <div class='title'>align-content</div>
+                <div class='option'>
+                  stretch<input autocomplete='off' type='radio' name='align-content' value='stretch' checked>
+                  flex-start<input autocomplete='off' type='radio' name='align-content' value='flex-start'>
+                  flex-end<input autocomplete='off' type='radio' name='align-content' value='flex-end'>
+                  center<input autocomplete='off' type='radio' name='align-content' value='center'>
+                  space-between<input autocomplete='off' type='radio' name='align-content' value='space-between'>
+                  space-around<input autocomplete='off' type='radio' name='align-content' value='space-around'>
+                </div>
+              </div>
+            </div>
+            <!-- <div class='flex-children'>
+              order flex align-self
+            </div> -->
+
+            <div class='item-edit col-md-6 col-md-offset-3'>
+              <input autocomplete='off' type="button" id='add' class='btn btn-default' value='添加子元素'>
+              <input autocomplete='off' type="button" id='del' class='btn btn-default' value='删除子元素'>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src='./js/jquery-3.3.1.js'></script>
+  <script src='./js/bootstrap.js'></script>
+  <script src='./index.js'></script>
+</body>
+
+</html>
