@@ -46,9 +46,10 @@ function bind() {
   // 添加或删除子元素
   $('#add').on('click', addItem);
   $('#del').on('click', delItem);
+
   //子元素事件委托
   $flexParent.on('click', '.flex-item', menu);
-  $flexParent.on('click', checkMenu);
+  $flexParent.on('click', checkMenuAndBorder);
   $editBtn.on('click', setItemSetting);
   $menuParent.find('#cancelBtn').on('click', cancelMenu);
 }
@@ -127,7 +128,6 @@ function delItem() {
  * 菜单栏
  */
 
-let itemFlag = true; //flag用来判断修改当前元素时 是否点击其他元素 true：未点击  false:点击其他元素
 
 //设定menu操作功能
 /**
@@ -138,15 +138,12 @@ let itemFlag = true; //flag用来判断修改当前元素时 是否点击其他�
 function menu(e) {
   getItemSetting(e);
   setMenu(e);
-  // console.log(e);
 }
+
 
 //取消修改
 function cancelMenu() {
   toggleMenu();
-  itemFlag = true;
-  // $(`#${editItemId}`).css('border', '0.5px solid skyblue');
-  toggleItem(editItemId);
 }
 
 //设置当前子元素，修改菜单中的值为当前元素的属性
@@ -164,9 +161,7 @@ function getItemSetting(e) {
 
   //设置要更新的子元素
   //如果在点击修改按钮之前点击了其他元素，则不修改当前子元素的id
-  if (itemFlag) {
-    editItemId = id;
-  }
+  editItemId = id;
 
   // console.log(oldSett);
 
@@ -178,26 +173,22 @@ function getItemSetting(e) {
 
 //修改子元素样式
 function setItemSetting() {
-  itemFlag = true;
   //获取子元素更改后的设置
   let order = $menuParent.find('#order').val();
   let flex = $menuParent.find('#flex').val();
   let alignSelf = $menuParent.find('#align-self').val();
-  // console.log(order, flex, alignSelf);
+  console.log(order, flex, alignSelf);
 
   itemsSetting[editItemId.toString()] = {
-    'order': order.toString(),
-    'flex': flex.toString(),
-    'align-self': alignSelf.toString()
+    'order': order,
+    'flex': flex,
+    'align-self': alignSelf
   }
 
   console.log('修改:', editItemId, itemsSetting[editItemId]);
-  // $(`#${editItemId}`).css('border', '0.5px solid skyblue');
-  // $menuParent.css('width', 0).css('height', 0);
-  toggleItem(editItemId);
-  toggleMenu();
 
-  setItemCss(editItemId)
+  toggleMenu();
+  setItemCss(editItemId);
 }
 
 //更改要修改的子元素的flex、order、align-self属性
@@ -214,12 +205,9 @@ function setMenu({ 'offsetX': x, 'offsetY': y, 'target': t } = e) {
   y += t.offsetTop + 5;
   if (x > 525) x = 400;
   if (y > 345) y = 345;
-  // console.log(x, y);
-  $menuParent.css('left', x).css('top', y).css('width', '151px').css('height', '125px')
-  itemFlag = false;
-  toggleItem(editItemId);
-  // $(`#${editItemId}`).css('border', '2px solid black');
-  // console.log(x, y);
+
+  $menuParent.css('left', x).css('top', y).css('width', '151px').css('height', '125px');
+
 }
 
 //menu展开和消失
@@ -227,35 +215,30 @@ function toggleMenu() {
   let position = parseInt($menuParent.css('left'));
   // console.log(position,parseInt($menuParent.css('right')));
   if (position > 0) {
-    $menuParent.css('width', '0').css('height', '0')
+    $menuParent.css('width', '0').css('height', '0');
   } else {
     $menuParent.css('width', '151px').css('height', '125px');
   }
 }
 
-//改变正在修改属性子元素的边框样式
-//子元素点击效果
-function toggleItem(id) {
-  if (itemFlag == false) {
-    $(`#${id}`).css('border', '2px solid black');
-  } else {
-    $(`#${id}`).css('border', '0.5px solid skyblue');
-  }
-}
 
 //检查当前元素修改属性时是否点击了其他元素，如果点击了其他元素则将此元素边框样式还原
 //还原后将当前点击的元素设置为menu绑定元素
-function checkMenu(e) {
-  // console.log(e.target.id);
-  if (e.target.id != editItemId) {
-    itemFlag = true;
-    // $(`#${editItemId}`).css('border', '0.5px solid skyblue');
-    toggleItem(editItemId);
-    editItemId = e.target.id;
-    console.log(e.target.id, editItemId);
-    if (editItemId == '') {
-      toggleMenu();
-    }
+function checkMenuAndBorder(e) {
+  let items = $('.flex-container>.flex-item');
+  let itemId = $(e.target).attr('id') || '';
+
+  //活动元素边框
+  items.each(function () {
+    this.className = 'flex-item';
+  })
+
+  //如果点击子元素，设置边框，如果点击父元素内空白处，则隐藏菜单
+  if (itemId.slice(0, 4) == 'item') {
+    e.target.className = 'flex-item active';
+  } else {
+    toggleMenu();
   }
+
 }
 
