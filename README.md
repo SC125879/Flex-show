@@ -1,5 +1,7 @@
-﻿# Flex-show
-flex 布局演示
+﻿# Flex-show 
+   演示地址:https://sc125879.github.io/Flex-show/
+
+flex 布局演示 
 1、父级属性设置
 
   1）flex-direction 设定主轴排列方向
