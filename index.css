@@ -1,0 +1,123 @@
+.info{
+  margin-top:5px;
+  margin-left:16px;
+
+}
+.info a{
+  padding:2px;
+  background-color:rgb(182, 180, 180);
+  color:#222;
+}
+.contents{
+  position:relative;
+
+  overflow:hidden;
+  height:500px;
+  margin:0;
+  padding:0;
+  background-color:ghostwhite;
+}
+
+.container-title{
+  font-size:25px;
+  margin-top:10px;
+  margin-left:16px;
+  font-weight:bold;
+}
+
+.flex-container{
+  /* padding:0 */
+  display:flex;
+  width:680px;
+  height:480px;
+  overflow:hidden;
+  border:3px solid slateblue;
+  border-radius:12px;
+  padding:10px;      
+}
+.flex-container .flex-item{
+
+  width:65px;
+  height:65px;
+  border:0.5px solid skyblue;
+  border-radius:3px;
+  font-size:20px;
+  text-align:center;
+  line-height:68px; 
+  background-color:steelblue;
+
+}
+.flex-container .flex-item.active{
+  border:2px solid black;
+}
+.flex-item:hover{
+  border:3px solid slategrey !important;
+}
+.flex-item:active{
+  border:4px solid slategrey;
+}
+
+/* 操作区 */
+.flex-parent{
+  font-size:14px;
+}
+.setAttr{
+  background-color:rgba(56,56,56,0.1);
+  margin:1px 0;
+  padding:3px 10px;
+  border-radius:3px;
+}
+.title{
+  font-size:16px;
+  font-weight:bold;
+}
+.option input{
+  margin-right:5px;
+}
+.item-edit{
+  margin-top:20px;
+}
+
+
+/* 元素设置菜单 */
+.item-menu{
+  z-index:999;
+  position:absolute;
+  overflow:hidden;
+  left:-151px;
+  top:-125px;
+  width:0;
+  height:0;
+  /* border:0.5px solid black; */
+  border-radius:10px;
+  box-shadow:0.5px 0.5px 1px black;
+  background-color:mintcream;
+  transition:width 0.2s ease,height 0.2s ease,left 0.3s ease;
+}
+.item-menu .menu{
+  list-style:none;
+  width:150px;
+  height:90px;
+  padding:2px;
+  margin:0;
+}
+.menu li{
+  display:block;
+  width:140px;
+  height:30px;
+  /* border:1px solid black; */
+  padding:4px 2px;
+  text-align:left;
+}
+.item-menu .menu input{
+  width:50px;
+  height:20px;
+}
+.item-menu .menu select{
+  width:70px;
+}
+.item-menu .menu-btn{
+  margin-left:28px;
+  margin-bottom:4px;
+}
+
