@@ -1,5 +1,17 @@
+.info{
+  margin-top:5px;
+  margin-left:16px;
+
+}
+.info a{
+  padding:2px;
+  background-color:rgb(182, 180, 180);
+  color:#222;
+}
 .contents{
   position:relative;
+
+  overflow:hidden;
   height:500px;
   margin:0;
   padding:0;
@@ -72,8 +84,8 @@
   z-index:999;
   position:absolute;
   overflow:hidden;
-  left:0px;
-  top:0px;
+  left:-151px;
+  top:-125px;
   width:0;
   height:0;
   /* border:0.5px solid black; */

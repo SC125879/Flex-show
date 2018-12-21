@@ -213,7 +213,7 @@ function setMenu({ 'offsetX': x, 'offsetY': y, 'target': t } = e) {
 //menu展开和消失
 function toggleMenu() {
   let position = parseInt($menuParent.css('left'));
-  // console.log(position,parseInt($menuParent.css('right')));
+  console.log(position,parseInt($menuParent.css('top')));
   if (position > 0) {
     $menuParent.css('width', '0').css('height', '0');
   } else {
@@ -226,7 +226,7 @@ function toggleMenu() {
 //还原后将当前点击的元素设置为menu绑定元素
 function checkMenuAndBorder(e) {
   let items = $('.flex-container>.flex-item');
-  let itemId = $(e.target).attr('id') || '';
+  let itemId = $(e.target).attr('id') || '1';
 
   //活动元素边框
   items.each(function () {
@@ -234,9 +234,11 @@ function checkMenuAndBorder(e) {
   })
 
   //如果点击子元素，设置边框，如果点击父元素内空白处，则隐藏菜单
+  // console.log(itemId);
   if (itemId.slice(0, 4) == 'item') {
     e.target.className = 'flex-item active';
-  } else {
+  } else{
+    // console.log(111);
     toggleMenu();
   }
 
