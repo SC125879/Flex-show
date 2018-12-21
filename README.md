@@ -1,4 +1,4 @@
-# Flex-show
+﻿# Flex-show
 flex 布局演示
 1、父级属性设置
 
@@ -8,8 +8,7 @@ flex 布局演示
      column:垂直方向，从上到下
      column-reverse:垂直方向，从下到上
      
-   
-  2) justify-content 设定主轴上的对齐方式
+   2) justify-content 设定主轴上的对齐方式
      flex-start(默认): 左对齐
      flex-end:右对齐
      center:居中
@@ -40,3 +39,5 @@ flex 布局演示
   2) flex:0 1 auto(默认）
   flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
   3) align-self: auto
+
+未完待续....
